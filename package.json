@@ -4,9 +4,10 @@
   "scripts": {
     "dev": "vite --host",
     "preview": "vite preview",
+    "install-lib": "cd ./lib && yarn install",
+    "build-lib": "cd ./lib && yarn build",
     "build-vite": "tsc && vite build",
-    "build-lib": "cd ./lib && yarn && yarn build",
-    "build": "yarn build-lib && yarn build-vite"
+    "build": "yarn install-lib && yarn build-lib && yarn build-vite"
   },
   "dependencies": {
     "@sanity/icons": "^1.3.0",
