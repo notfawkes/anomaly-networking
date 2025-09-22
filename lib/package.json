@@ -5,8 +5,13 @@
   "scripts": {
     "build": "parcel build --no-cache",
     "watch": "rm -rf dist && parcel watch",
+    "preinstall": "echo Installing dependencies...",
     "publish": "yarn build && npm publish"
   },
+  "source": "./index.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/cjs/index.js",
@@ -14,10 +19,6 @@
       "types": "./dist/types/index.d.ts"
     }
   },
-  "source": "./index.ts",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/types/index.d.ts",
   "targets": {
     "main": {
       "optimize": true
@@ -27,9 +28,9 @@
     }
   },
   "devDependencies": {
+    "parcel": "2.6.2",
     "@parcel/packager-ts": "2.6.2",
     "@parcel/transformer-typescript-types": "2.6.2",
-    "parcel": "^2.6.2",
     "typescript": ">=3.0.0"
   },
   "peerDependencies": {
