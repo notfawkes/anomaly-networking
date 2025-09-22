@@ -3,35 +3,29 @@
   "version": "0.0.4",
   "description": "Connect elements with lines",
   "scripts": {
-    "build": "parcel build --no-cache",
-    "watch": "rm -rf dist && parcel watch",
+    "clean": "rimraf dist",
+    "build": "npm run clean && npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel . --out-dir dist --extensions \".ts,.tsx\" --source-maps inline --ignore \"node_modules/**/*,dist/**/*\"",
     "preinstall": "echo Installing dependencies...",
-    "publish": "yarn build && npm publish"
+    "publish": "npm run build && npm publish"
   },
-  "source": "./index.ts",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/types/index.d.ts",
-  "exports": {
-    ".": {
-      "require": "./dist/cjs/index.js",
-      "default": "./dist/esm/index.js",
-      "types": "./dist/types/index.d.ts"
-    }
-  },
-  "targets": {
-    "main": {
-      "optimize": true
-    },
-    "module": {
-      "optimize": true
-    }
-  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
-    "parcel": "2.6.2",
-    "@parcel/packager-ts": "2.6.2",
-    "@parcel/transformer-typescript-types": "2.6.2",
-    "typescript": ">=3.0.0"
+    "@babel/cli": "^7.22.15",
+    "@babel/core": "^7.22.15",
+    "@babel/preset-env": "^7.22.15",
+    "@babel/preset-react": "^7.22.15",
+    "@babel/preset-typescript": "^7.22.15",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "rimraf": "^5.0.1",
+    "typescript": "~4.8.0"
   },
   "peerDependencies": {
     "react": "^17.0.2"
@@ -50,6 +44,11 @@
   ],
   "author": "Herman Wikner",
   "license": "MIT",
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions"
+  ],
   "bugs": {
     "url": "https://github.com/hermanwikner/react-connect-lines/issues"
   },
