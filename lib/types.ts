@@ -11,6 +11,7 @@ export interface ConnectWithProps {
 export interface ConnectElement {
   connectWith?: ConnectWithProps[]
   id: string
+  label?: string
 }
 
 export type ConnectElementsReducerPayload = ConnectElement & {

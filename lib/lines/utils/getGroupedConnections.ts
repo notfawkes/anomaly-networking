@@ -24,7 +24,7 @@ export function getGroupedConnections(props: GetGroupedConnectionsProps) {
         .map((x) => {
           return {
             rect: getElement(x)?.getBoundingClientRect(),
-            color: connectWith?.find((a) => a.id === x.id)?.color || '#000000',
+            color: connectWith?.find((a) => a.id === x.id)?.color || '#ffffff',
             edge: connectWith?.find((a) => a.id === x.id)?.edge || 'bezier',
             stroke: connectWith?.find((a) => a.id === x.id)?.stroke || 'solid',
             // connectionsLen: connectionsLen,

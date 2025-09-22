@@ -13,7 +13,7 @@ const SVG_STYLE: React.CSSProperties = {
   height: '100%',
 }
 
-const DEFAULT_COLOR = '#000000'
+const DEFAULT_COLOR = '#ffffff'
 const EMPTY_ARRAY: [] = []
 
 type PointsData = (
@@ -204,7 +204,7 @@ export function ConnectLines(props: ConnectLinesProps) {
               refY="5"
               viewBox="0 0 10 10"
             >
-              <path d="M 0 0 L 10 5 L 0 10 z" fill={c} />
+              <path d="M 0 0 L 10 5 L 0 10 z" fill={c??'#ffffff'} stroke={c || '#ffffff'} />
               {/* <circle cx="5" cy="5" r="5" fill={c} /> */}
             </marker>
           </defs>

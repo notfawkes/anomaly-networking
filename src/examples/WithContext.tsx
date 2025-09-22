@@ -1,4 +1,4 @@
-import {AddIcon, EditIcon, TrashIcon} from '@sanity/icons'
+import {EditIcon, TrashIcon} from '@sanity/icons'
 import {
   Box,
   Button,
@@ -19,16 +19,13 @@ import {motion} from 'framer-motion'
 import {useCallback, useState} from 'react'
 import { Connect, ConnectProvider, ConnectElement } from '../../lib/index'
 // import {Connect, ConnectProvider, ConnectElement} from '../../lib'
-import {randomEmojiId} from './randomId'
+import {getNetworkElement, NETWORK_ELEMENTS, NetworkElement} from './randomId'
 
 const MotionCard = motion(Card)
 
 export function WithContext() {
   const [connections, setConnections] = useState<ConnectElement[]>([])
 
-  const add = useCallback(() => {
-    setConnections((prev) => [...prev, {id: randomEmojiId()}])
-  }, [])
 
   const remove = useCallback(
     (id: string) => {
@@ -96,15 +93,21 @@ export function WithContext() {
   return (
     <ConnectProvider>
       <Card padding={5} sizing="border" height="fill">
-        <Flex marginBottom={4}>
-          <Button
-            text="Add element"
-            onClick={add}
-            fontSize={1}
-            padding={2}
-            mode="ghost"
-            icon={AddIcon}
-          />
+        <Flex marginBottom={4} gap={3}>
+          <Select
+            fontSize={2}
+            onChange={event => {
+              const element = getNetworkElement(event.currentTarget.value)
+              setConnections(prev => [...prev, {id: element.id, label: element.label}])
+            }}
+          >
+            <option value="" disabled selected>Select a network element</option>
+            {NETWORK_ELEMENTS.map(element => (
+              <option key={element.type} value={element.type}>
+                {element.label}
+              </option>
+            ))}
+          </Select>
         </Flex>
 
         <Grid columns={2} gapY={7} gapX={9}>
@@ -124,7 +127,7 @@ export function WithContext() {
                   <Flex align="center" justify="space-between" gap={2}>
                     <Box>
                       <Text align="center" muted weight="bold">
-                        {c.id}
+                        {c.label || c.id}
                       </Text>
                     </Box>
 
@@ -173,7 +176,7 @@ export function WithContext() {
                                       return (
                                         <Stack key={x.id} space={4}>
                                           <Text weight="bold" size={1}>
-                                            {x.id}
+                                            {x.label || x.id}
                                           </Text>
                                           <Flex gap={3}>
                                             <Stack space={2}>

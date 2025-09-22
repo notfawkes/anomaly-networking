@@ -1,0 +1,13 @@
+{
+	"servers": {
+		"anomaly-networking Docs": {
+			"type": "http",
+			"url": "https://gitmcp.io/notfawkes/anomaly-networking"
+		},
+		"my-mcp-server-0cca2b66": {
+			"url": "http://localhost:3000/",
+			"type": "http"
+		}
+	},
+	"inputs": []
+}
